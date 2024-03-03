@@ -22,9 +22,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class StartMenu implements Screen {
 
-    private Texture btnTexture;
+    private Texture btnPlayTexture;
     private TextButton btnPlay;
-    private TextButton btnExit;
 
     private Stage stg;
     private OrthographicCamera cam;
@@ -32,6 +31,8 @@ public class StartMenu implements Screen {
 
     private GCat appGame;
 
+    private float ScaleRatioW;
+    private float ScaleRatioH;
 
     private Texture backgroundTexture;
 
@@ -43,33 +44,21 @@ public class StartMenu implements Screen {
 
         createComponents();
 
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundmenu.png"));
+        // texture Button PLAY (press/up)
+        TextureRegion upBtnTexture = new TextureRegion(btnPlayTexture, 0,0,400, 235);
+        TextureRegion downBtnTexture = new TextureRegion(btnPlayTexture, 0,236,400, 235);
 
-
-        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        vip = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
-        vip.apply();
-
-        // status
-        btnTexture = new Texture(Gdx.files.internal("buttonplay.png"));
-        TextureRegion upBtnTexture = new TextureRegion(btnTexture, 0,0,400, 235);
-        TextureRegion downBtnTexture = new TextureRegion(btnTexture, 0,236,400, 235);
-
-        // style
+        // style button PLAY
         TextButton.TextButtonStyle btnStyle = new TextButton.TextButtonStyle();
         btnStyle.font = new BitmapFont();
         btnStyle.fontColor = Color.BLACK;
         btnStyle.up = new TextureRegionDrawable(upBtnTexture);
-        //btnStyle.over = new TextureRegionDrawable(overBtnTexture);
         btnStyle.down = new TextureRegionDrawable(downBtnTexture);
 
-        // кнопки
+        // кнопки PLAY
         btnPlay = new TextButton("", btnStyle);
         //btnPlay.setPosition(200,200);
         //btnPlay.setVisible(true);
-
-        // background
-
 
         btnPlay.addListener(new ClickListener(){
             @Override
@@ -89,6 +78,15 @@ public class StartMenu implements Screen {
 
     }
 
+    private void createComponents() {
+        backgroundTexture = new Texture(Gdx.files.internal("backgroundmenu.png"));
+        btnPlayTexture = new Texture(Gdx.files.internal("buttonplay.png"));
+
+        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        vip = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
+        vip.apply();
+    }
+
     @Override
     public void render(float delta) {
 
@@ -96,8 +94,16 @@ public class StartMenu implements Screen {
         //Gdx.gl.glClear(GL32.GL_COLOR_BUFFER_BIT);
        ScreenUtils.clear(Color.BLACK);
 
+        ScaleRatioW = (float)Gdx.graphics.getWidth() / backgroundTexture.getWidth();
+        ScaleRatioH = (float)Gdx.graphics.getHeight() / backgroundTexture.getHeight();
+        System.out.println(ScaleRatioW);
+        System.out.println(ScaleRatioH);
+
        appGame.getBatch().begin();
-       appGame.getBatch().draw(backgroundTexture, 0, 0);
+       appGame.getBatch().draw(backgroundTexture, 0, 0,
+               backgroundTexture.getWidth() * ScaleRatioW,
+               backgroundTexture.getHeight() * ScaleRatioH);
+       //appGame.getBatch().draw(backgroundTexture, 0, 0);
        appGame.getBatch().end();
 
        stg.act(delta);
@@ -129,11 +135,9 @@ public class StartMenu implements Screen {
     @Override
     public void dispose() {
 
-        btnTexture.dispose();
+        btnPlayTexture.dispose();
         stg.dispose();
     }
 
-    private void createComponents() {
 
-    }
 }
