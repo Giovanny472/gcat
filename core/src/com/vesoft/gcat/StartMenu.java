@@ -1,10 +1,8 @@
 package com.vesoft.gcat;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL32;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -22,27 +19,53 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class StartMenu implements Screen {
 
+    private GCat appGame;
+    private Mir mirBall;
+
     private Texture btnPlayTexture;
     private TextButton btnPlay;
+    private Texture bkgTexture;
 
     private Stage stg;
     private OrthographicCamera cam;
     private Viewport vip;
 
-    private GCat appGame;
+    private float scaleRatioW;
+    private float scaleRatioH;
 
-    private float ScaleRatioW;
-    private float ScaleRatioH;
+    public StartMenu() {
+        createComponents();
+        configComponents();
+    }
 
-    private Texture backgroundTexture;
+    @Override
+    public void dispose() {
+
+        btnPlayTexture.dispose();
+        stg.dispose();
+        mirBall.dispose();
+    }
+
+    private void createComponents() {
+        bkgTexture = new Texture(Gdx.files.internal("backgroundmenu.png"));
+        scaleRatioW = (float)Gdx.graphics.getWidth() / bkgTexture.getWidth();
+        scaleRatioH = (float)Gdx.graphics.getHeight() / bkgTexture.getHeight();
+
+        btnPlayTexture = new Texture(Gdx.files.internal("buttonplay.png"));
+
+        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        vip = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
+        vip.apply();
+
+        mirBall = new Mir();
+    }
 
     public void Init(GCat value){
         appGame = value;
+        mirBall.Init(appGame);
     }
 
-    public StartMenu() {
-
-        createComponents();
+    private void configComponents() {
 
         // texture Button PLAY (press/up)
         TextureRegion upBtnTexture = new TextureRegion(btnPlayTexture, 0,0,400, 235);
@@ -64,6 +87,8 @@ public class StartMenu implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
+                //
+                appGame.setScreen(mirBall);
             }
         });
 
@@ -78,15 +103,6 @@ public class StartMenu implements Screen {
 
     }
 
-    private void createComponents() {
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundmenu.png"));
-        btnPlayTexture = new Texture(Gdx.files.internal("buttonplay.png"));
-
-        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        vip = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
-        vip.apply();
-    }
-
     @Override
     public void render(float delta) {
 
@@ -94,15 +110,11 @@ public class StartMenu implements Screen {
         //Gdx.gl.glClear(GL32.GL_COLOR_BUFFER_BIT);
        ScreenUtils.clear(Color.BLACK);
 
-        ScaleRatioW = (float)Gdx.graphics.getWidth() / backgroundTexture.getWidth();
-        ScaleRatioH = (float)Gdx.graphics.getHeight() / backgroundTexture.getHeight();
-        System.out.println(ScaleRatioW);
-        System.out.println(ScaleRatioH);
 
        appGame.getBatch().begin();
-       appGame.getBatch().draw(backgroundTexture, 0, 0,
-               backgroundTexture.getWidth() * ScaleRatioW,
-               backgroundTexture.getHeight() * ScaleRatioH);
+       appGame.getBatch().draw(bkgTexture, 0, 0,
+               bkgTexture.getWidth() * scaleRatioW,
+               bkgTexture.getHeight() * scaleRatioH);
        //appGame.getBatch().draw(backgroundTexture, 0, 0);
        appGame.getBatch().end();
 
@@ -131,13 +143,4 @@ public class StartMenu implements Screen {
     @Override
     public void hide() {
     }
-
-    @Override
-    public void dispose() {
-
-        btnPlayTexture.dispose();
-        stg.dispose();
-    }
-
-
 }

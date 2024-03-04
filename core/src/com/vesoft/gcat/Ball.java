@@ -14,18 +14,25 @@ public class Ball {
 
     private Boolean IsDeleted;
 
-    private Texture BallTexture;
+    private Texture ballTexture;
+
+    private float scaleRatio;
+
+    private int sizeBall;
 
     public Ball(int speed) {
 
         this.IsDeleted = false;
 
-        BallTexture = new Texture(Gdx.files.internal("circle.png"));
+        ballTexture = new Texture(Gdx.files.internal("ball.png"));
+        scaleRatio = (float)ballTexture.getHeight()/ Gdx.graphics.getHeight();
 
-        this.PosX = MathUtils.random(BallTexture.getWidth(), Gdx.graphics.getWidth() - BallTexture.getWidth());
-        this.PosY = MathUtils.random(BallTexture.getHeight(), Gdx.graphics.getHeight() - BallTexture.getHeight());
+        sizeBall = (int)(ballTexture.getHeight() * scaleRatio);
 
-        if (this.PosX > Gdx.graphics.getWidth() /2) {
+        this.PosX = MathUtils.random(sizeBall, Gdx.graphics.getWidth() - sizeBall);
+        this.PosY = MathUtils.random(sizeBall, Gdx.graphics.getHeight() - sizeBall);
+
+        if (this.PosX > Gdx.graphics.getWidth()/2) {
             speed *= -1;
         }
         this.SpeedX = speed;
@@ -35,14 +42,19 @@ public class Ball {
         }
         this.SpeedY = speed;
     }
+
+    public float getScale() {
+        return  scaleRatio;
+    }
+
     public void Update() {
         PosX += SpeedX;
         PosY += SpeedY;
 
-        if (PosX < 0 || PosX+ BallTexture.getWidth() >= Gdx.graphics.getWidth()) {
+        if (PosX < 0 || PosX+ sizeBall>= Gdx.graphics.getWidth()) {
             SpeedX = -SpeedX;
         }
-        if (PosY < 0 || PosY+ BallTexture.getHeight() >= Gdx.graphics.getHeight()) {
+        if (PosY < 0 || PosY+ sizeBall >= Gdx.graphics.getHeight()) {
             SpeedY = -SpeedY;
         }
     }
@@ -56,15 +68,15 @@ public class Ball {
     }
 
     public Texture GetTexture() {
-        return this.BallTexture;
+        return ballTexture;
     }
 
     public int getWidth(){
-        return this.BallTexture.getWidth();
+        return ballTexture.getWidth();
     }
 
     public int getHeight(){
-        return this.BallTexture.getHeight();
+        return ballTexture.getHeight();
     }
 
     public void SetIsDelete(Boolean Val) {
