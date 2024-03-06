@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import java.util.Random;
 
-public class Ball {
+public class Laser {
     private int PosX;
     private int PosY;
 
@@ -20,14 +20,12 @@ public class Ball {
 
     private int sizeBall;
 
-    public Ball(int speed) {
+    public Laser(int speed, Texture laser) {
 
         this.IsDeleted = false;
 
-        ballTexture = new Texture(Gdx.files.internal("ball.png"));
-        scaleRatio = (float)ballTexture.getHeight()/ Gdx.graphics.getHeight();
-
-        sizeBall = (int)(ballTexture.getHeight() * scaleRatio);
+        ballTexture = laser;
+        sizeBall = (int)(ballTexture.getHeight());
 
         this.PosX = MathUtils.random(sizeBall, Gdx.graphics.getWidth() - sizeBall);
         this.PosY = MathUtils.random(sizeBall, Gdx.graphics.getHeight() - sizeBall);

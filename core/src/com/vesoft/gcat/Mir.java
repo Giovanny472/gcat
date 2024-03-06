@@ -11,31 +11,26 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Mir implements Screen {
 
-    private Texture bkgTexture;
-    float scaleRatioBkgW;
-    float scaleRatioBkgH;
-
-    private Stage stg;
-    private OrthographicCamera cam;
-    private Viewport vip;
 
     private GCat appGame;
+    private Texture bkgTexture;
+    private  Laser laser;
 
-    private  Ball ball;
+    private int speedLaser;
 
-    public Mir() {
+    public Mir(GCat AValue) {
 
-        bkgTexture = new Texture(Gdx.files.internal("backgroundmir01.png"));
-        scaleRatioBkgW = (float)Gdx.graphics.getWidth() / bkgTexture.getWidth();
-        scaleRatioBkgH = (float)Gdx.graphics.getHeight() / bkgTexture.getHeight();
+        // game
+        appGame = AValue;
 
-        ball = new Ball(3);
+        // background
+        bkgTexture = appGame.getImgFactory().getBkgMir01();
 
-        //cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        //vip = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
-        //vip.apply();
-        //stg = new Stage();
-        //Gdx.input.setInputProcessor(stg);
+        // скорость laser
+        speedLaser = appGame.getImgFactory().getSpeedLaser();
+
+        // laser
+        laser = new Laser(speedLaser, appGame.getImgFactory().getLaser());
 
     }
 
@@ -44,28 +39,19 @@ public class Mir implements Screen {
         bkgTexture.dispose();
     }
 
-    public void Init(GCat AValue) {
-        appGame = AValue;
-    }
-
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
 
+        // background
         appGame.getBatch().begin();
-        appGame.getBatch().draw(bkgTexture, 0, 0,
-               bkgTexture.getWidth() * scaleRatioBkgW,
-               bkgTexture.getHeight() * scaleRatioBkgH);
+        appGame.getBatch().draw(bkgTexture, 0, 0, bkgTexture.getWidth(), bkgTexture.getHeight());
         appGame.getBatch().end();
 
         appGame.getBatch().begin();
-        ball.Update();
-        appGame.getBatch().draw(ball.GetTexture(), ball.GetX(), ball.GetY(),
-                ball.getWidth() * ball.getScale(), ball.getHeight() * ball.getScale());
+        laser.Update();
+        appGame.getBatch().draw(laser.GetTexture(), laser.GetX(), laser.GetY(), laser.getWidth(), laser.getHeight() );
         appGame.getBatch().end();
-
-        //stg.act(delta);
-        //stg.draw();
     }
 
     @Override

@@ -6,19 +6,29 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GCat extends Game {
 
 	private SpriteBatch Batch;
-	private StartMenu Menu;
+	private MainMenu Menu;
+	private ImagesFactory imgFactory;
 
 	@Override
 	public void create() {
 		Batch = new SpriteBatch();
 
-		Menu = new StartMenu();
-		Menu.Init(this);
+		// для опредение изображений
+		imgFactory = new ImagesFactory();
+
+		// cоздание main menu
+		Menu = new MainMenu(this);
+
+		// переходим в меню
 		setScreen(Menu);
 	}
 
 	public SpriteBatch getBatch() {
 		return Batch;
+	}
+
+	public ImagesFactory getImgFactory(){
+		return imgFactory;
 	}
 
 	@Override
@@ -28,6 +38,8 @@ public class GCat extends Game {
 
 	@Override
 	public void dispose () {
+		imgFactory = null;
+
 		Menu.dispose();
 		Batch.dispose();
 	}
