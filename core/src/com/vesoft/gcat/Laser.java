@@ -12,13 +12,13 @@ public class Laser {
     private int SpeedX;
     private int SpeedY;
 
-    private Boolean IsDeleted;
-
     private Texture ballTexture;
 
     private float scaleRatio;
 
     private int sizeBall;
+
+    Boolean IsDeleted;
 
     public Laser(int speed, Texture laser) {
 
@@ -77,11 +77,4 @@ public class Laser {
         return ballTexture.getHeight();
     }
 
-    public void SetIsDelete(Boolean Val) {
-        IsDeleted = Val;
-    }
-
-    public Boolean GetIsDelete() {
-        return  IsDeleted;
-    }
 }

@@ -21,7 +21,7 @@ public class ImagesFactory {
 
         if (sizeScreenH <= 800) {
             typeScreen = TypeSizeScreen.SMALL;
-        } else if (sizeScreenH > 800 && sizeScreenH <= 1080) {
+        } else if (sizeScreenH > 800 && sizeScreenH <= 1280) {
             typeScreen = TypeSizeScreen.MEDIUM;
         } else {
             typeScreen = TypeSizeScreen.BIG;
