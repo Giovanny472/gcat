@@ -20,98 +20,90 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MainMenu implements Screen {
 
     private GCat appGame;
-    private Mir mirBall;
+    private Mir mirLaser;
+    private Stage stg;
 
-    private Texture btnPlayTexture;
-    private TextButton btnPlay;
     private Texture bkgTexture;
 
-    private Stage stg;
-    private OrthographicCamera cam;
-    private Viewport vip;
 
-    private float sizeBkgW;
-    private float sizeBkgH;
+    private TextButton btnPlay;
+    private Texture btnPlayTextureUp, btnPlayTextureDown;
 
-    private float sizeBtnPlayW;
-    private float sizeBtnPlayH;
-    private float scaleRatioBtnPlayW;
-    private float scaleRatioBtnPlayH;
+
+    private TextButton btnConfig;
+    private Texture btnConfigTextureUp, btnConfigTextureDown;
+
 
     public MainMenu(GCat value) {
 
         appGame = value;
-        mirBall = new Mir(appGame);
+        mirLaser = new Mir(appGame);
 
-        createComponents();
-        configComponents();
+        createButtons();
     }
 
     @Override
     public void dispose() {
 
-        btnPlayTexture.dispose();
+        bkgTexture.dispose();
+        mirLaser.dispose();
         stg.dispose();
-        mirBall.dispose();
-    }
-
-    private void createComponents() {
-        bkgTexture = new Texture(Gdx.files.internal("backgroundmenu.png"));
-        float scaleRatioW = (float)Gdx.graphics.getWidth() / bkgTexture.getWidth();
-        float scaleRatioH = (float)Gdx.graphics.getHeight() / bkgTexture.getHeight();
-        sizeBkgW = scaleRatioW * (float)bkgTexture.getWidth();
-        sizeBkgH = scaleRatioH * (float)bkgTexture.getHeight();
-
-        btnPlayTexture = new Texture(Gdx.files.internal("buttonplay.png"));
-        scaleRatioBtnPlayW = (float)btnPlayTexture.getWidth()/ Gdx.graphics.getWidth();
-        scaleRatioBtnPlayH = (float)btnPlayTexture.getHeight()/Gdx.graphics.getHeight();
-        sizeBtnPlayW = scaleRatioBtnPlayW * (float)btnPlayTexture.getWidth();
-        sizeBtnPlayH = scaleRatioBtnPlayH * (float)btnPlayTexture.getHeight();
-
-        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        vip = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
-        vip.apply();
-
 
     }
 
-    private void configComponents() {
+    private void createButtons() {
 
-        // texture Button PLAY (press/up)
-        TextureRegion upBtnTexture = new TextureRegion(btnPlayTexture, 0,0, 400, 235);
-        TextureRegion downBtnTexture = new TextureRegion(btnPlayTexture, 0,236, 400, 235);
+        // texture brackground
+        bkgTexture = appGame.getImgFactory().getBkgMainMenu();
 
-        // style button PLAY
-        TextButton.TextButtonStyle btnStyle = new TextButton.TextButtonStyle();
-        btnStyle.font = new BitmapFont();
-        btnStyle.up = new TextureRegionDrawable(upBtnTexture);
-        btnStyle.down = new TextureRegionDrawable(downBtnTexture);
-
-        // кнопки PLAY
-        btnPlay = new TextButton("", btnStyle);
-
-       // if (Gdx.graphics.getWidth() < 1080) {
-       //     btnPlay.setTransform(true);
-       //     btnPlay.setScale(scaleRatioBtnPlayW, scaleRatioBtnPlayH);
-       // }
-
+        // button - PLAY
+        btnPlayTextureUp = appGame.getImgFactory().getBtnPlayUp();
+        btnPlayTextureDown = appGame.getImgFactory().getBtnPlayDown();
+        // region - button PLAY (press/up)
+        TextureRegion btnPlayUpRegion = new TextureRegion(btnPlayTextureUp, 0,0, btnPlayTextureUp.getWidth(), btnPlayTextureUp.getHeight());
+        TextureRegion btnPlayDownRegion = new TextureRegion(btnPlayTextureDown, 0,0, btnPlayTextureDown.getWidth(), btnPlayTextureDown.getHeight());
+        // style - button PLAY
+        TextButton.TextButtonStyle btnPlayStyle = new TextButton.TextButtonStyle();
+        btnPlayStyle.font = new BitmapFont();
+        btnPlayStyle.up = new TextureRegionDrawable(btnPlayUpRegion);
+        btnPlayStyle.down = new TextureRegionDrawable(btnPlayDownRegion);
+        // Btn PLAY
+        btnPlay = new TextButton("", btnPlayStyle);
         btnPlay.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
-                //
-                appGame.setScreen(mirBall);
+                appGame.setScreen(mirLaser);
             }
         });
 
+
+        // button - CONFIG
+        btnConfigTextureUp = appGame.getImgFactory().getBtnConfigUp();
+        btnConfigTextureDown = appGame.getImgFactory().getBtnConfigDown();
+        // region - button CONFIG (press/up)
+        TextureRegion btnConfigUpRegion = new TextureRegion(btnConfigTextureUp, 0,0, btnConfigTextureUp.getWidth(), btnConfigTextureUp.getHeight());
+        TextureRegion btnConfigDownRegion = new TextureRegion(btnConfigTextureDown, 0,0, btnConfigTextureDown.getWidth(), btnConfigTextureDown.getHeight());
+        // style - button CONFIG
+        TextButton.TextButtonStyle btnConfigStyle = new TextButton.TextButtonStyle();
+        btnConfigStyle.font = new BitmapFont();
+        btnConfigStyle.up = new TextureRegionDrawable(btnConfigUpRegion);
+        btnConfigStyle.down = new TextureRegionDrawable(btnConfigDownRegion);
+        // Btn CONFIG
+        btnConfig = new TextButton("", btnConfigStyle);
+        btnConfig.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //appGame.setScreen(mirLaser);
+            }
+        });
+
+
+
         Table tbl = new Table();
         tbl.setFillParent(true);
-        //if (Gdx.graphics.getWidth() < 1080) {
-        //    tbl.setPosition((float) (Gdx.graphics.getWidth() / 2 - (float) (btnPlay.getWidth() / 1.8)), 200);
-        //}
-        System.out.println(Gdx.graphics.getWidth());
-        System.out.println((float)(Gdx.graphics.getWidth()/2));
-        tbl.add(btnPlay).pad(5.0f);
+
+        tbl.add(btnPlay).left();
+        tbl.add(btnConfig).right();
         tbl.pack();
 
         stg = new Stage();
@@ -120,6 +112,7 @@ public class MainMenu implements Screen {
 
     }
 
+
     @Override
     public void render(float delta) {
 
@@ -127,19 +120,19 @@ public class MainMenu implements Screen {
         //Gdx.gl.glClear(GL32.GL_COLOR_BUFFER_BIT);
        ScreenUtils.clear(Color.BLACK);
 
-
        appGame.getBatch().begin();
-       appGame.getBatch().draw(bkgTexture, 0, 0, sizeBkgW, sizeBkgH);
+       appGame.getBatch().draw(bkgTexture, 0, 0);
        appGame.getBatch().end();
 
-       stg.act(delta);
-       stg.draw();
+        stg.act(delta);
+        stg.draw();
+
     }
 
 
     @Override
     public void resize(int width, int height) {
-        vip.update(width, height, true);
+
     }
 
     @Override

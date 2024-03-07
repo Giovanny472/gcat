@@ -61,7 +61,7 @@ public class Mir implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        //vip.update(width, height, true);
+
     }
 
     @Override
