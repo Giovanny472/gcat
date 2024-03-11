@@ -3,9 +3,13 @@ package com.vesoft.gcat;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL32;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -25,13 +29,19 @@ public class MainMenu implements Screen {
 
     private Texture bkgTexture;
 
-
     private TextButton btnPlay;
     private Texture btnPlayTextureUp, btnPlayTextureDown;
 
-
     private TextButton btnConfig;
     private Texture btnConfigTextureUp, btnConfigTextureDown;
+
+
+    private Texture catTexture;
+    private SpriteBatch catSpriteBatch;
+    private Animation<TextureRegion> catAnimation;
+    private static final int FRAME_COLS = 4;
+    private static final int FRAME_ROWS = 1;
+    private float catStateTime;
 
 
     public MainMenu(GCat value) {
@@ -40,6 +50,8 @@ public class MainMenu implements Screen {
         mirLaser = new Mir(appGame);
 
         createButtons();
+
+        createCat();
     }
 
     @Override
@@ -49,6 +61,32 @@ public class MainMenu implements Screen {
         mirLaser.dispose();
         stg.dispose();
 
+        catTexture.dispose();
+        catSpriteBatch.dispose();
+    }
+
+    private void createCat() {
+        catTexture = appGame.getImgFactory().getImageCat();
+
+
+        TextureRegion[][] listCatRegion = TextureRegion.split(catTexture,
+                catTexture.getWidth() / FRAME_COLS,
+                catTexture.getHeight() / FRAME_ROWS);
+
+
+        TextureRegion[] listCatFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
+        int index = 0;
+        for (int idx01 = 0; idx01 < FRAME_ROWS; idx01++) {
+            for (int idx02 = 0; idx02 < FRAME_COLS; idx02++) {
+                listCatFrames[index++] = listCatRegion[idx01][idx02];
+            }
+        }
+
+
+        catAnimation = new Animation<TextureRegion>(0.9f, listCatFrames);
+
+        catSpriteBatch = new SpriteBatch();
+        catStateTime = 0;
     }
 
     private void createButtons() {
@@ -117,7 +155,7 @@ public class MainMenu implements Screen {
     public void render(float delta) {
 
         //Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
-        //Gdx.gl.glClear(GL32.GL_COLOR_BUFFER_BIT);
+       // Gdx.gl.glClear(GL32.GL_COLOR_BUFFER_BIT);
        ScreenUtils.clear(Color.BLACK);
 
        appGame.getBatch().begin();
@@ -126,6 +164,13 @@ public class MainMenu implements Screen {
 
         stg.act(delta);
         stg.draw();
+
+
+        catStateTime += Gdx.graphics.getDeltaTime();
+        TextureRegion catCurrentFrame = catAnimation.getKeyFrame(catStateTime, true);
+        catSpriteBatch.begin();
+        catSpriteBatch.draw(catCurrentFrame, appGame.getImgFactory().getImageCatPosX(), appGame.getImgFactory().getImageCatPosY());
+        catSpriteBatch.end();
 
     }
 

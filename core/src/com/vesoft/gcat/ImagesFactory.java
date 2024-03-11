@@ -188,4 +188,67 @@ public class ImagesFactory {
         return tex;
     }
 
+    public Texture getImageCat(){
+        Texture tex;
+
+        switch (typeScreen){
+            case SMALL:
+                tex = new Texture(Gdx.files.internal("cat_small.png"));
+                break;
+            case MEDIUM:
+                tex = new Texture(Gdx.files.internal("cat_medium.png"));
+                break;
+            case BIG:
+                tex = new Texture(Gdx.files.internal("cat_big.png"));
+                break;
+            default:
+                tex = new Texture(Gdx.files.internal("cat_small.png"));
+                break;
+        }
+        return tex;
+    }
+
+
+    public int getImageCatPosX() {
+        int posx;
+
+        switch (typeScreen){
+            case SMALL:
+                posx = 210;
+                break;
+            case MEDIUM:
+                posx = 250;
+                break;
+            case BIG:
+                posx = 290;
+                break;
+            default:
+                posx = 100;
+                break;
+        }
+        return posx;
+
+    }
+
+    public int getImageCatPosY() {
+        int posy;
+
+        switch (typeScreen){
+            case SMALL:
+                posy = 190;
+                break;
+            case MEDIUM:
+                posy = 180;
+                break;
+            case BIG:
+                posy = 450;
+                break;
+            default:
+                posy = 100;
+                break;
+        }
+        return posy;
+
+    }
+
 }
