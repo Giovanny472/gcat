@@ -2,6 +2,7 @@ package com.vesoft.gcat;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.vesoft.gcat.mainmenu.MainMenu;
 
 public class GCat extends Game {
 
@@ -13,7 +14,7 @@ public class GCat extends Game {
 	public void create() {
 		Batch = new SpriteBatch();
 
-		// для опредение изображений
+		// для опредения изображений
 		imgFactory = new ImagesFactory();
 
 		// cоздание main menu

@@ -1,15 +1,10 @@
-package com.vesoft.gcat;
+package com.vesoft.gcat.mainmenu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL32;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,13 +13,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.vesoft.gcat.entities.Cat;
+import com.vesoft.gcat.GCat;
+import com.vesoft.gcat.screens.Mir;
 
 public class MainMenu implements Screen {
 
-    private GCat appGame;
-    private Mir mirLaser;
+    private final GCat appGame;
+    private final Mir mirLaser;
+    private final Cat cat;
     private Stage stg;
 
     private Texture bkgTexture;
@@ -36,57 +33,35 @@ public class MainMenu implements Screen {
     private Texture btnConfigTextureUp, btnConfigTextureDown;
 
 
-    private Texture catTexture;
-    private SpriteBatch catSpriteBatch;
-    private Animation<TextureRegion> catAnimation;
-    private static final int FRAME_COLS = 4;
-    private static final int FRAME_ROWS = 1;
-    private float catStateTime;
-
-
     public MainMenu(GCat value) {
 
         appGame = value;
-        mirLaser = new Mir(appGame);
 
+        // laser
+        mirLaser = new Mir(appGame);
+        // cat
+        cat = new Cat(appGame);
+
+        // создание кнопок
         createButtons();
 
-        createCat();
     }
 
     @Override
     public void dispose() {
 
         bkgTexture.dispose();
+        btnPlayTextureUp.dispose();
+        btnPlayTextureDown.dispose();
+        btnConfigTextureUp.dispose();
+        btnConfigTextureDown.dispose();
+
+        cat.dispose();
+
         mirLaser.dispose();
+
         stg.dispose();
 
-        catTexture.dispose();
-        catSpriteBatch.dispose();
-    }
-
-    private void createCat() {
-        catTexture = appGame.getImgFactory().getImageCat();
-
-
-        TextureRegion[][] listCatRegion = TextureRegion.split(catTexture,
-                catTexture.getWidth() / FRAME_COLS,
-                catTexture.getHeight() / FRAME_ROWS);
-
-
-        TextureRegion[] listCatFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
-        int index = 0;
-        for (int idx01 = 0; idx01 < FRAME_ROWS; idx01++) {
-            for (int idx02 = 0; idx02 < FRAME_COLS; idx02++) {
-                listCatFrames[index++] = listCatRegion[idx01][idx02];
-            }
-        }
-
-
-        catAnimation = new Animation<TextureRegion>(0.9f, listCatFrames);
-
-        catSpriteBatch = new SpriteBatch();
-        catStateTime = 0;
     }
 
     private void createButtons() {
@@ -154,7 +129,7 @@ public class MainMenu implements Screen {
     @Override
     public void render(float delta) {
 
-        //Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
+       //Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
        // Gdx.gl.glClear(GL32.GL_COLOR_BUFFER_BIT);
        ScreenUtils.clear(Color.BLACK);
 
@@ -166,11 +141,7 @@ public class MainMenu implements Screen {
         stg.draw();
 
 
-        catStateTime += Gdx.graphics.getDeltaTime();
-        TextureRegion catCurrentFrame = catAnimation.getKeyFrame(catStateTime, true);
-        catSpriteBatch.begin();
-        catSpriteBatch.draw(catCurrentFrame, appGame.getImgFactory().getImageCatPosX(), appGame.getImgFactory().getImageCatPosY());
-        catSpriteBatch.end();
+        cat.draw();
 
     }
 

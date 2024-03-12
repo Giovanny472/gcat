@@ -1,14 +1,13 @@
-package com.vesoft.gcat;
+package com.vesoft.gcat.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.vesoft.gcat.GCat;
+import com.vesoft.gcat.entities.Laser;
 
 import java.util.ArrayList;
 
@@ -77,12 +76,12 @@ public class Mir implements Screen, InputProcessor {
         for (int idx = listLasers.size()-1; idx>=0; idx--){
 
             Laser lsr = listLasers.get(idx);
-            if (lsr.IsDeleted) {
+            if (lsr.getIsDeleted()) {
                 continue;
             }
             if (Gdx.input.isTouched()) {
                 if (isLaser(lsr)) {
-                    lsr.IsDeleted = true;
+                    lsr.setIsDeleted(true);
                     if (limitMakeLaser <= countLimitLaser) {
                         makeLaser(); makeLaser();
                         limitMakeLaser++;

@@ -33,16 +33,16 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                tex = new Texture(Gdx.files.internal("backgroundmir01_small.png"));
+                tex = new Texture(Gdx.files.internal("mir01/backgroundmir01_small.png"));
                 break;
             case MEDIUM:
-                tex = new Texture(Gdx.files.internal("backgroundmir01_medium.png"));
+                tex = new Texture(Gdx.files.internal("mir01/backgroundmir01_medium.png"));
                 break;
             case BIG:
-                tex = new Texture(Gdx.files.internal("backgroundmir01_big.png"));
+                tex = new Texture(Gdx.files.internal("mir01/backgroundmir01_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("backgroundmir01_big.png"));
+                tex = new Texture(Gdx.files.internal("mir01/backgroundmir01_big.png"));
                 break;
         }
         return tex;
@@ -52,16 +52,16 @@ public class ImagesFactory {
         Texture tex;
         switch (typeScreen){
             case SMALL:
-                tex = new Texture(Gdx.files.internal("laser_small.png"));
+                tex = new Texture(Gdx.files.internal("laser/laser_small.png"));
                 break;
             case MEDIUM:
-                tex = new Texture(Gdx.files.internal("laser_medium.png"));
+                tex = new Texture(Gdx.files.internal("laser/laser_medium.png"));
                 break;
             case BIG:
-                tex = new Texture(Gdx.files.internal("laser_big.png"));
+                tex = new Texture(Gdx.files.internal("laser/laser_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("laser_big.png"));
+                tex = new Texture(Gdx.files.internal("laser/laser_big.png"));
                 break;
         }
         return tex;
@@ -92,16 +92,16 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                tex = new Texture(Gdx.files.internal("backgroundmenu_small.png"));
+                tex = new Texture(Gdx.files.internal("menu/backgroundmenu_small.png"));
                 break;
             case MEDIUM:
-                tex = new Texture(Gdx.files.internal("backgroundmenu_medium.png"));
+                tex = new Texture(Gdx.files.internal("menu/backgroundmenu_medium.png"));
                 break;
             case BIG:
-                tex = new Texture(Gdx.files.internal("backgroundmenu_big.png"));
+                tex = new Texture(Gdx.files.internal("menu/backgroundmenu_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("backgroundmenu_big.png"));
+                tex = new Texture(Gdx.files.internal("menu/backgroundmenu_big.png"));
                 break;
         }
         return tex;
@@ -113,16 +113,16 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                tex = new Texture(Gdx.files.internal("btnplay_up_small.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnplay_up_small.png"));
                 break;
             case MEDIUM:
-                tex = new Texture(Gdx.files.internal("btnplay_up_medium.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnplay_up_medium.png"));
                 break;
             case BIG:
-                tex = new Texture(Gdx.files.internal("btnplay_up_big.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnplay_up_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("btnplay_up_big.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnplay_up_big.png"));
                 break;
         }
         return tex;
@@ -133,16 +133,16 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                tex = new Texture(Gdx.files.internal("btnplay_down_small.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnplay_down_small.png"));
                 break;
             case MEDIUM:
-                tex = new Texture(Gdx.files.internal("btnplay_down_medium.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnplay_down_medium.png"));
                 break;
             case BIG:
-                tex = new Texture(Gdx.files.internal("btnplay_down_big.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnplay_down_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("btnplay_down_big.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnplay_down_big.png"));
                 break;
         }
         return tex;
@@ -153,16 +153,16 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                tex = new Texture(Gdx.files.internal("btnconfig_up_small.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnconfig_up_small.png"));
                 break;
             case MEDIUM:
-                tex = new Texture(Gdx.files.internal("btnconfig_up_medium.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnconfig_up_medium.png"));
                 break;
             case BIG:
-                tex = new Texture(Gdx.files.internal("btnconfig_up_big.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnconfig_up_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("btnconfig_up_big.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnconfig_up_big.png"));
                 break;
         }
         return tex;
@@ -173,16 +173,16 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                tex = new Texture(Gdx.files.internal("btnconfig_down_small.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnconfig_down_small.png"));
                 break;
             case MEDIUM:
-                tex = new Texture(Gdx.files.internal("btnconfig_down_medium.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnconfig_down_medium.png"));
                 break;
             case BIG:
-                tex = new Texture(Gdx.files.internal("btnconfig_down_big.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnconfig_down_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("btnconfig_down_big.png"));
+                tex = new Texture(Gdx.files.internal("buttons/btnconfig_down_big.png"));
                 break;
         }
         return tex;
@@ -193,16 +193,16 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                tex = new Texture(Gdx.files.internal("cat_small.png"));
+                tex = new Texture(Gdx.files.internal("cat/cat_small.png"));
                 break;
             case MEDIUM:
-                tex = new Texture(Gdx.files.internal("cat_medium.png"));
+                tex = new Texture(Gdx.files.internal("cat/cat_medium.png"));
                 break;
             case BIG:
-                tex = new Texture(Gdx.files.internal("cat_big.png"));
+                tex = new Texture(Gdx.files.internal("cat/cat_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("cat_small.png"));
+                tex = new Texture(Gdx.files.internal("cat/cat_small.png"));
                 break;
         }
         return tex;
@@ -214,7 +214,7 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                posx = 210;
+                posx = 200;
                 break;
             case MEDIUM:
                 posx = 250;

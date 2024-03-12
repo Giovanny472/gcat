@@ -1,9 +1,7 @@
-package com.vesoft.gcat;
+package com.vesoft.gcat.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
-
-import java.util.Random;
 
 public class Laser {
     private int PosX;
@@ -18,11 +16,11 @@ public class Laser {
 
     private int sizeBall;
 
-    Boolean IsDeleted;
+    private Boolean isDeleted;
 
     public Laser(int speed, Texture laser) {
 
-        this.IsDeleted = false;
+        isDeleted = false;
 
         ballTexture = laser;
         sizeBall = (int)(ballTexture.getHeight());
@@ -77,4 +75,11 @@ public class Laser {
         return ballTexture.getHeight();
     }
 
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean AValue) {
+        isDeleted = AValue;
+    }
 }
