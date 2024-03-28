@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.vesoft.gcat.entities.Cat;
 import com.vesoft.gcat.GCat;
+import com.vesoft.gcat.entities.Mouse;
 import com.vesoft.gcat.screens.Mir;
 
 public class MainMenu implements Screen {
@@ -22,6 +23,8 @@ public class MainMenu implements Screen {
     private final GCat appGame;
     private final Mir mirLaser;
     private final Cat cat;
+    private final Mouse mouse;
+
     private Stage stg;
 
     private Texture bkgTexture;
@@ -42,6 +45,9 @@ public class MainMenu implements Screen {
         // cat
         cat = new Cat(appGame);
 
+        // mouse
+        mouse = new Mouse(appGame);
+
         // создание кнопок
         createButtons();
 
@@ -57,6 +63,7 @@ public class MainMenu implements Screen {
         btnConfigTextureDown.dispose();
 
         cat.dispose();
+        mouse.dispose();
 
         mirLaser.dispose();
 
@@ -137,12 +144,15 @@ public class MainMenu implements Screen {
        appGame.getBatch().draw(bkgTexture, 0, 0);
        appGame.getBatch().end();
 
+
         stg.act(delta);
         stg.draw();
 
 
         cat.draw();
 
+        // mouse
+        mouse.draw();
     }
 
 

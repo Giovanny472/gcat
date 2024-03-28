@@ -251,4 +251,25 @@ public class ImagesFactory {
 
     }
 
+    public Texture getImageMouse(){
+        Texture tex;
+
+        switch (typeScreen){
+            case SMALL:
+                tex = new Texture(Gdx.files.internal("mouse/mouse_small.png"));
+                break;
+            case MEDIUM:
+                tex = new Texture(Gdx.files.internal("mouse/mouse_medium.png"));
+                break;
+            case BIG:
+                tex = new Texture(Gdx.files.internal("mouse/mouse_big.png"));
+                break;
+            default:
+                tex = new Texture(Gdx.files.internal("mouse/mouse_small.png"));
+                break;
+        }
+        return tex;
+    }
+
 }
+
