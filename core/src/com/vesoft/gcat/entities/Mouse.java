@@ -29,7 +29,7 @@ public class Mouse {
         mouseSpriteBatch = new SpriteBatch();
         mouseSprite = new com.badlogic.gdx.graphics.g2d.Sprite(mouseTexture);;
 
-        speedMouse = 3f;
+        speedMouse = appGame.getImgFactory().getSpeedMouse();
         posx = 0f;
         posy = 0f;
         stop = false;
@@ -43,13 +43,13 @@ public class Mouse {
 
     }
 
-    public void update(){
+    public void update() {
 
         if (posx < Gdx.graphics.getWidth()+mouseTexture.getHeight() && directLeftToRight) {
-            posy += speedMouse - 1.8f;
+            posy += speedMouse - appGame.getImgFactory().getAngleMouse();
             posx += speedMouse;
         } else if (posy > -(mouseTexture.getHeight()+50)&& !directLeftToRight)  {
-            posy -= speedMouse - 1.8f;
+            posy -= speedMouse - appGame.getImgFactory().getAngleMouse();
             posx -= speedMouse;
             directLeftToRight = false;
         } else {
@@ -59,16 +59,27 @@ public class Mouse {
 
     public void draw() {
 
-        appGame.getBatch().begin();
+//        appGame.getBatch().begin();
+//        this.update();
+//        if (directLeftToRight) {
+//            appGame.getBatch().draw(mouseTexture, posx, posy, mouseTexture.getWidth(), mouseTexture.getHeight());
+//        } else {
+//            appGame.getBatch().draw(mouseTexture, posx, posy, mouseTexture.getWidth(), mouseTexture.getHeight());
+//        }
+//        appGame.getBatch().end();
+
+
+        mouseSpriteBatch.begin();
         this.update();
-
         if (directLeftToRight) {
-            appGame.getBatch().draw(mouseTexture, posx, posy, mouseTexture.getWidth(), mouseTexture.getHeight());
+            mouseSprite.setRotation(0f);
         } else {
-            appGame.getBatch().draw(mouseTexture, posx, posy, mouseTexture.getWidth(), mouseTexture.getHeight());
+            mouseSprite.setRotation(180f);
         }
+        mouseSprite.setPosition(posx, posy);
+        mouseSprite.draw(mouseSpriteBatch);
+        mouseSpriteBatch.end();
 
-        appGame.getBatch().end();
 
     }
 }

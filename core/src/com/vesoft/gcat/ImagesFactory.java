@@ -271,5 +271,45 @@ public class ImagesFactory {
         return tex;
     }
 
+    public float getSpeedMouse(){
+        float spd;
+
+        switch (typeScreen){
+            case SMALL:
+                spd = 5f;
+                break;
+            case MEDIUM:
+                spd = 5f;
+                break;
+            case BIG:
+                spd = 13f;
+                break;
+            default:
+                spd = 3f;
+                break;
+        }
+        return spd;
+    }
+
+    public float getAngleMouse(){
+        float angle;
+
+        switch (typeScreen){
+            case SMALL:
+                angle = 3f;
+                break;
+            case MEDIUM:
+                angle = 1.9f;
+                break;
+            case BIG:
+                angle = 7.5f;
+                break;
+            default:
+                angle = 3f;
+                break;
+        }
+        return angle;
+    }
+
 }
 
