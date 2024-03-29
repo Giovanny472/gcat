@@ -311,5 +311,67 @@ public class ImagesFactory {
         return angle;
     }
 
+
+    public Texture getImageNameApp(){
+        Texture tex;
+
+        switch (typeScreen){
+            case SMALL:
+                tex = new Texture(Gdx.files.internal("name/name_small.png"));
+                break;
+            case MEDIUM:
+                tex = new Texture(Gdx.files.internal("name/name_medium.png"));
+                break;
+            case BIG:
+                tex = new Texture(Gdx.files.internal("name/name_big.png"));
+                break;
+            default:
+                tex = new Texture(Gdx.files.internal("name/name_small.png"));
+                break;
+        }
+        return tex;
+    }
+
+    public float getOffsetXNameApp(){
+        float offset;
+
+        switch (typeScreen){
+            case SMALL:
+                offset = 20f;
+                break;
+            case MEDIUM:
+                offset = 30f;
+                break;
+            case BIG:
+                offset = 40f;
+                break;
+            default:
+                offset = 20f;
+                break;
+        }
+        return offset;
+    }
+
+
+    public float getOffsetYNameApp(){
+        float offset;
+
+        switch (typeScreen){
+            case SMALL:
+                offset = 40f;
+                break;
+            case MEDIUM:
+                offset = 50f;
+                break;
+            case BIG:
+                offset = 200f;
+                break;
+            default:
+                offset = 20f;
+                break;
+        }
+        return offset;
+    }
+
 }
 

@@ -28,6 +28,7 @@ public class MainMenu implements Screen {
     private Stage stg;
 
     private Texture bkgTexture;
+    private Texture nameAppTexture;
 
     private TextButton btnPlay;
     private Texture btnPlayTextureUp, btnPlayTextureDown;
@@ -57,6 +58,7 @@ public class MainMenu implements Screen {
     public void dispose() {
 
         bkgTexture.dispose();
+        nameAppTexture.dispose();
         btnPlayTextureUp.dispose();
         btnPlayTextureDown.dispose();
         btnConfigTextureUp.dispose();
@@ -75,6 +77,9 @@ public class MainMenu implements Screen {
 
         // texture brackground
         bkgTexture = appGame.getImgFactory().getBkgMainMenu();
+
+        // texture nameApp
+        nameAppTexture = appGame.getImgFactory().getImageNameApp();
 
         // button - PLAY
         btnPlayTextureUp = appGame.getImgFactory().getBtnPlayUp();
@@ -142,6 +147,8 @@ public class MainMenu implements Screen {
 
        appGame.getBatch().begin();
        appGame.getBatch().draw(bkgTexture, 0, 0);
+        appGame.getBatch().draw(nameAppTexture, appGame.getImgFactory().getOffsetXNameApp(),
+                Gdx.graphics.getHeight() - nameAppTexture.getHeight() - appGame.getImgFactory().getOffsetYNameApp());
        appGame.getBatch().end();
 
 
