@@ -373,5 +373,66 @@ public class ImagesFactory {
         return offset;
     }
 
+    public Texture getImageCheese(){
+        Texture tex;
+
+        switch (typeScreen){
+            case SMALL:
+                tex = new Texture(Gdx.files.internal("cheese/cheese_small.png"));
+                break;
+            case MEDIUM:
+                tex = new Texture(Gdx.files.internal("cheese/cheese_medium.png"));
+                break;
+            case BIG:
+                tex = new Texture(Gdx.files.internal("cheese/cheese_big.png"));
+                break;
+            default:
+                tex = new Texture(Gdx.files.internal("cheese/cheese_small.png"));
+                break;
+        }
+        return tex;
+    }
+
+    public float getOffsetXCheese(){
+        float offset;
+
+        switch (typeScreen){
+            case SMALL:
+                offset = 20f;
+                break;
+            case MEDIUM:
+                offset = 30f;
+                break;
+            case BIG:
+                offset = 40f;
+                break;
+            default:
+                offset = 20f;
+                break;
+        }
+        return offset;
+    }
+
+
+    public float getOffsetYCheese(){
+        float offset;
+
+        switch (typeScreen){
+            case SMALL:
+                offset = 70f;
+                break;
+            case MEDIUM:
+                offset = 50f;
+                break;
+            case BIG:
+                offset = 80f;
+                break;
+            default:
+                offset = 20f;
+                break;
+        }
+        return offset;
+    }
+
 }
 

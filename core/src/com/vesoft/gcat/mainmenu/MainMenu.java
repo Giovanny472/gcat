@@ -15,7 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.vesoft.gcat.entities.Cat;
 import com.vesoft.gcat.GCat;
+import com.vesoft.gcat.entities.Cheese;
 import com.vesoft.gcat.entities.Mouse;
+import com.vesoft.gcat.entities.NameApp;
 import com.vesoft.gcat.screens.Mir;
 
 public class MainMenu implements Screen {
@@ -28,7 +30,8 @@ public class MainMenu implements Screen {
     private Stage stg;
 
     private Texture bkgTexture;
-    private Texture nameAppTexture;
+    private NameApp nameApp;
+    private Cheese cheese;
 
     private TextButton btnPlay;
     private Texture btnPlayTextureUp, btnPlayTextureDown;
@@ -49,6 +52,12 @@ public class MainMenu implements Screen {
         // mouse
         mouse = new Mouse(appGame);
 
+        // texture nameApp
+        nameApp = new NameApp(appGame);
+
+        // texture cheese
+        cheese = new Cheese(appGame);
+
         // создание кнопок
         createButtons();
 
@@ -58,7 +67,10 @@ public class MainMenu implements Screen {
     public void dispose() {
 
         bkgTexture.dispose();
-        nameAppTexture.dispose();
+
+        nameApp.dispose();
+        cheese.dispose();
+
         btnPlayTextureUp.dispose();
         btnPlayTextureDown.dispose();
         btnConfigTextureUp.dispose();
@@ -78,20 +90,20 @@ public class MainMenu implements Screen {
         // texture brackground
         bkgTexture = appGame.getImgFactory().getBkgMainMenu();
 
-        // texture nameApp
-        nameAppTexture = appGame.getImgFactory().getImageNameApp();
-
-        // button - PLAY
+         // button - PLAY
         btnPlayTextureUp = appGame.getImgFactory().getBtnPlayUp();
         btnPlayTextureDown = appGame.getImgFactory().getBtnPlayDown();
+
         // region - button PLAY (press/up)
         TextureRegion btnPlayUpRegion = new TextureRegion(btnPlayTextureUp, 0,0, btnPlayTextureUp.getWidth(), btnPlayTextureUp.getHeight());
         TextureRegion btnPlayDownRegion = new TextureRegion(btnPlayTextureDown, 0,0, btnPlayTextureDown.getWidth(), btnPlayTextureDown.getHeight());
+
         // style - button PLAY
         TextButton.TextButtonStyle btnPlayStyle = new TextButton.TextButtonStyle();
         btnPlayStyle.font = new BitmapFont();
         btnPlayStyle.up = new TextureRegionDrawable(btnPlayUpRegion);
         btnPlayStyle.down = new TextureRegionDrawable(btnPlayDownRegion);
+
         // Btn PLAY
         btnPlay = new TextButton("", btnPlayStyle);
         btnPlay.addListener(new ClickListener(){
@@ -100,7 +112,6 @@ public class MainMenu implements Screen {
                 appGame.setScreen(mirLaser);
             }
         });
-
 
         // button - CONFIG
         btnConfigTextureUp = appGame.getImgFactory().getBtnConfigUp();
@@ -122,8 +133,6 @@ public class MainMenu implements Screen {
             }
         });
 
-
-
         Table tbl = new Table();
         tbl.setFillParent(true);
 
@@ -137,7 +146,6 @@ public class MainMenu implements Screen {
 
     }
 
-
     @Override
     public void render(float delta) {
 
@@ -147,10 +155,10 @@ public class MainMenu implements Screen {
 
        appGame.getBatch().begin();
        appGame.getBatch().draw(bkgTexture, 0, 0);
-        appGame.getBatch().draw(nameAppTexture, appGame.getImgFactory().getOffsetXNameApp(),
-                Gdx.graphics.getHeight() - nameAppTexture.getHeight() - appGame.getImgFactory().getOffsetYNameApp());
        appGame.getBatch().end();
 
+       nameApp.draw();
+       cheese.draw();
 
         stg.act(delta);
         stg.draw();
