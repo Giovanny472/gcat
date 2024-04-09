@@ -17,6 +17,7 @@ import com.vesoft.gcat.entities.Cat;
 import com.vesoft.gcat.GCat;
 import com.vesoft.gcat.entities.Cheese;
 import com.vesoft.gcat.entities.Mouse;
+import com.vesoft.gcat.entities.MouseStop;
 import com.vesoft.gcat.entities.NameApp;
 import com.vesoft.gcat.screens.Mir;
 
@@ -26,6 +27,7 @@ public class MainMenu implements Screen {
     private final Mir mirLaser;
     private final Cat cat;
     private final Mouse mouse;
+    private final MouseStop mousestop;
 
     private Stage stg;
 
@@ -51,6 +53,7 @@ public class MainMenu implements Screen {
 
         // mouse
         mouse = new Mouse(appGame);
+        mousestop = new MouseStop(appGame);
 
         // texture nameApp
         nameApp = new NameApp(appGame);
@@ -78,6 +81,7 @@ public class MainMenu implements Screen {
 
         cat.dispose();
         mouse.dispose();
+        mousestop.dispose();
 
         mirLaser.dispose();
 
@@ -168,6 +172,7 @@ public class MainMenu implements Screen {
 
         // mouse
         mouse.draw();
+        mousestop.draw();
     }
 
 

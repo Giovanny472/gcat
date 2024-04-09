@@ -11,6 +11,7 @@ enum TypeSizeScreen {
 }
 
 public class ImagesFactory {
+
     private int sizeScreenW;
     private int sizeScreenH;
     private TypeSizeScreen typeScreen;
@@ -23,7 +24,7 @@ public class ImagesFactory {
             typeScreen = TypeSizeScreen.SMALL;
         } else if (sizeScreenH > 800 && sizeScreenH <= 1280) {
             typeScreen = TypeSizeScreen.MEDIUM;
-        } else {
+        } else if (sizeScreenH > 1280) {
             typeScreen = TypeSizeScreen.BIG;
         }
     }
@@ -101,7 +102,7 @@ public class ImagesFactory {
                 tex = new Texture(Gdx.files.internal("menu/backgroundmenu_big.png"));
                 break;
             default:
-                tex = new Texture(Gdx.files.internal("menu/backgroundmenu_big.png"));
+                tex = new Texture(Gdx.files.internal("menu/backgroundmenu_small.png"));
                 break;
         }
         return tex;
@@ -271,6 +272,68 @@ public class ImagesFactory {
         return tex;
     }
 
+    public Texture getImageMouseStop(){
+        Texture tex;
+
+        switch (typeScreen){
+            case SMALL:
+                tex = new Texture(Gdx.files.internal("mouse/mouse_stop_small.png"));
+                break;
+            case MEDIUM:
+                tex = new Texture(Gdx.files.internal("mouse/mouse_stop_medium.png"));
+                break;
+            case BIG:
+                tex = new Texture(Gdx.files.internal("mouse/mouse_stop_big.png"));
+                break;
+            default:
+                tex = new Texture(Gdx.files.internal("mouse/mouse_stop_small.png"));
+                break;
+        }
+        return tex;
+    }
+
+    public float getImageMouseStopPosY() {
+        float posy;
+
+        switch (typeScreen){
+            case SMALL:
+                posy = 184f;
+                break;
+            case MEDIUM:
+                posy = 150;
+                break;
+            case BIG:
+                posy = 400f;
+                break;
+            default:
+                posy = 100;
+                break;
+        }
+        return posy;
+
+    }
+
+    public float getImageMouseStopPosX() {
+        float posx;
+
+        switch (typeScreen){
+            case SMALL:
+                posx = 85f;
+                break;
+            case MEDIUM:
+                posx = 250;
+                break;
+            case BIG:
+                posx = 240f;
+                break;
+            default:
+                posx = 100;
+                break;
+        }
+        return posx;
+
+    }
+
     public float getSpeedMouse(){
         float spd;
 
@@ -299,7 +362,7 @@ public class ImagesFactory {
                 angle = 3f;
                 break;
             case MEDIUM:
-                angle = 1.9f;
+                angle = 4.2f;
                 break;
             case BIG:
                 angle = 7.5f;
@@ -419,13 +482,13 @@ public class ImagesFactory {
 
         switch (typeScreen){
             case SMALL:
-                offset = 70f;
-                break;
-            case MEDIUM:
                 offset = 50f;
                 break;
+            case MEDIUM:
+                offset = 30f;
+                break;
             case BIG:
-                offset = 80f;
+                offset = 70f;
                 break;
             default:
                 offset = 20f;
